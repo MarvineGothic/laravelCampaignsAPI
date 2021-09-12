@@ -226,4 +226,11 @@ class CampaignsTest extends TestCase
             ->assertStatus(404)
         ->assertJson(["error" => "Campaign with this id doesn't exist"]);
     }
+
+    public function test_get_non_existing_campaign_by_id()
+    {
+        $response = $this->get("/api/campaigns/841e8ed8-6bd3-3647-8187-9d30c0dd8f0a");
+        $response->assertStatus(404)
+        ->assertJson(["error" => "Campaign '841e8ed8-6bd3-3647-8187-9d30c0dd8f0a' not found"]);
+    }
 }
