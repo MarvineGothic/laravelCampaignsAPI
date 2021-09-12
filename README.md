@@ -25,7 +25,7 @@
 
 API_URL=http://127.0.0.1:8000/api
 
-###GET /campaigns
+### GET /campaigns
 
 Returns all campaigns.
 
@@ -35,19 +35,19 @@ Parameters:
 - limit   - (optional) - Limit of elements per page. Default: 10. Min: 1. Max: 10
 - sortBy  - (optional) - any valid field. Default: `created_at`
 
-###GET /users
+### GET /users
 
 Returns all users
 
-###GET /users/email/search/{email}
+### GET /users/email/search/{email}
 
 Search users by email
 
-###GET /users/name/contains/{name}
+### GET /users/name/contains/{name}
 
 Search users by name "contains"
 
-###POST /campaigns
+### POST /campaigns
 
 Parameters (body):
 - campaign_id - string - required
@@ -56,7 +56,7 @@ Parameters (body):
     - type - string - required. Allowed values: ['channel', 'source', 'campaign_name', 'target_url']
     - value - string - required
 
-###DELETE /campaigns/{campaign_id}
+### DELETE /campaigns/{campaign_id}
 
 Delete campaign by campaign id
 
