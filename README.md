@@ -15,11 +15,19 @@
 
 ## Setup and start
  - make sure you have your docker running
- - copy .env.example to .env
  - run `setup-project` to set up node and composer packages
+- run `yarn start` to start mysql docker container and to start laravel app
  - run `yarn setup-db` on the first start. It will run db migrations and seed examples on db.
- - run `yarn start` to start mysql docker container and to start laravel app
  - run `yarn stop` to stop docker container
+
+## Manual setup (optional)
+ - copy .env.example to .env
+ - run `yarn install` and `composer install`
+ - run `docker-compose up -d` and `php artisan serve`
+ - run `php artisan migrate:fresh` and `php artisan db:seed`
+
+## Test
+ - run `yarn test`
 
 ## API Description
 

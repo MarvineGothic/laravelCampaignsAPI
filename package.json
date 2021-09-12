@@ -8,7 +8,7 @@
         "hot": "mix watch --hot",
         "prod": "npm run production",
         "production": "mix --production",
-        "setup-project": "yarn install && composer install",
+        "setup-project": "cp .env.example .env && yarn install && composer install",
         "start": "docker system prune -f && docker-compose up -d && php artisan serve",
         "setup-db": "php artisan migrate:fresh && php artisan db:seed",
         "stop": "docker system prune -f && docker-compose down",
