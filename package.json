@@ -1,0 +1,23 @@
+{
+    "private": true,
+    "scripts": {
+        "dev": "npm run development",
+        "development": "mix",
+        "watch": "mix watch",
+        "watch-poll": "mix watch -- --watch-options-poll=1000",
+        "hot": "mix watch --hot",
+        "prod": "npm run production",
+        "production": "mix --production",
+        "setup-project": "yarn install && composer install",
+        "start": "docker system prune -f && docker-compose up -d && php artisan serve",
+        "setup-db": "php artisan migrate:fresh && php artisan db:seed",
+        "stop": "docker system prune -f && docker-compose down",
+        "test": "composer test"
+    },
+    "devDependencies": {
+        "axios": "^0.21",
+        "laravel-mix": "^6.0.6",
+        "lodash": "^4.17.19",
+        "postcss": "^8.1.14"
+    }
+}
