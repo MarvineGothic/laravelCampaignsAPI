@@ -88,4 +88,10 @@ class User extends Model
         }
     ]', true);
     }
+
+    public static function findUser($id) {
+        $users = self::getUsers();
+        $userId = array_search($id, array_column($users, "id"));
+        return $users[$userId];
+    }
 }

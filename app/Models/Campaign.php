@@ -13,9 +13,12 @@ class Campaign extends Model
     protected $primaryKey = "id";
     protected $fillable = ["campaign_id", "author"];
 
-    public static function addAuthorAndInputs(&$campaign)
+    public function inputs() {
+        return $this->hasMany(Input::class);
+    }
+
+    public function addAuthorAndInputs()
     {
-        $campaign->author = User::getUsers()[$campaign->author - 1];
-        $campaign->inputs = Input::where("campaign_id", "=", $campaign->id)->get();
+        $this->author = User::findUser($this->author);
     }
 }

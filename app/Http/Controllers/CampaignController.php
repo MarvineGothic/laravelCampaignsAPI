@@ -29,9 +29,9 @@ class CampaignController extends Controller
         $limit = $request->query("limit") ?? 10;
         $limit = max(min(intval($limit), 10), 1);
 
-        $campaigns = Campaign::offset($offset)->limit($limit)->orderBy($sortBy, $sortOrder)->get();
+        $campaigns = Campaign::with("inputs")->offset($offset)->limit($limit)->orderBy($sortBy, $sortOrder)->get();
         foreach ($campaigns as $campaign) {
-            Campaign::addAuthorAndInputs($campaign);
+            $campaign->addAuthorAndInputs();
         }
 
         return response()->json([
@@ -66,7 +66,7 @@ class CampaignController extends Controller
             }
         }
 
-        Campaign::addAuthorAndInputs($campaign);
+        $campaign->addAuthorAndInputs();
 
         return response()->json($campaign, 201);
     }
@@ -80,11 +80,11 @@ class CampaignController extends Controller
      */
     public function show($campaign_id): JsonResponse
     {
-        $campaign = Campaign::where("campaign_id", "=", $campaign_id)->first();
+        $campaign = Campaign::with("inputs")->where("campaign_id", "=", $campaign_id)->first();
         if (!isset($campaign)) {
             throw new \Exception("Campaign '$campaign_id' not found", 404);
         }
-        Campaign::addAuthorAndInputs($campaign);
+        $campaign->addAuthorAndInputs();
         return response()->json($campaign);
     }
 
@@ -104,6 +104,10 @@ class CampaignController extends Controller
         }
 
         $suc = Campaign::destroy([$campaign["id"]]);
+
+        if (!$suc) {
+            throw new \Exception("Campaign not deleted", 500);
+        }
 
         return response()->json($suc, 204);
     }
